@@ -1,0 +1,53 @@
+type UserResponse{
+    username: String
+    email: String
+    address: String
+    neighborhood: String
+    city: String
+    cellphone: String
+    pets: PetResponse
+}
+
+type PetResponse{
+    name: String
+    age: Int
+    type: String
+    gender: String
+    adoptionDate: String
+}
+
+type Mutation {
+    createUser (
+        firstName: String!
+        secondName: String
+        firstSurName: String!
+        secondSurName: String!
+        email: String!
+        address: String!
+        neighborhood: String!
+        city: String!
+        cellphone: String!):String
+    updateUser (
+        email:String!,
+        firstName: String!
+        secondName: String
+        firstSurName: String!
+        secondSurName: String!
+        address: String!
+        neighborhood: String!
+        city: String!
+        cellphone: String!):String
+    deleteUser (email:String!):String
+}
+
+type Query {
+    getUser (
+        email:String!,
+        pet:Boolean!):UserResponse
+    getUsersByCity (
+        city:String!,
+        pet:Boolean!):[UserResponse]
+    getUsersByNeighborhood(
+        neighborhood:String!,
+        pet:Boolean!):[UserResponse]
+}

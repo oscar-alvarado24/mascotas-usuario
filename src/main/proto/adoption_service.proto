@@ -1,0 +1,36 @@
+syntax = "proto3";
+package user;
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "com.project.adoption.pet.application.dto";
+option java_outer_classname = "AdoptionProviderProto";
+option objc_class_prefix = "RTG";
+
+service AdoptionService {
+  // Receives an email and returns all associated adoptions on
+  rpc GetAdoptionsByEmail (AdoptionEmailRequest) returns ( AdoptionResponse);
+
+  // Retrieves all adoptions for multiple emails
+  rpc GetAdoptionsByEmails ( MultipleEmailsRequest) returns ( MultipleEmailsResponse);
+}
+
+message Adoptions {
+  uint64 id = 1;
+  uint64 pet_id = 2;
+  google.protobuf.Timestamp date_adoption = 3;
+}
+
+message AdoptionEmailRequest {
+  string email = 1;  // user email to find adoptions
+}
+message AdoptionResponse {
+  string email =1;
+  repeated Adoptions adoptions = 2;
+}
+message MultipleEmailsRequest {
+  repeated AdoptionEmailRequest emails = 1;
+}
+message MultipleEmailsResponse {
+  repeated AdoptionResponse adoptionResponses = 1;
+}

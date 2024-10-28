@@ -1,0 +1,19 @@
+server:
+  port: 8070
+spring:
+  application:
+    name: user
+  graphql.graphiql:
+    enabled: true
+  main:
+    allow-circular-references: true
+pet:
+  service:
+    url: ${PET_URL}
+
+grpc:
+  client:
+    adoption-service:
+      address: static://localhost:8050
+      negotiationType: plaintext
+      enableKeepAlive: true
